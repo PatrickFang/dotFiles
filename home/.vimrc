@@ -6,8 +6,6 @@ nmap <leader>r :source $MYVIMRC<cr>
 
 " Color scheme settings.
 syntax on
-colorscheme base16-tomorrow
-set background=dark
 
 " Set vim defaults
 set encoding=utf8
