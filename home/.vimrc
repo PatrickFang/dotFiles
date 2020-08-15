@@ -1,5 +1,36 @@
+set nocompatible              " be iMproved, required
+set number
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+Plugin 'git://git.wincent.com/command-t.git'
+Plugin 'file:///home/gmarik/path/to/plugin'
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+"""" Installed by myself for fuzzy search
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
+Plugin 'mileszs/ack.vim'
+Plugin 'janko-m/vim-test'
+Bundle 'vim-ruby/vim-ruby'
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+
 set runtimepath+=~/.vim
 execute pathogen#infect()
+
+
+" Keymapping settings
+let mapleader = ","
 
 " Reload VIMRC
 nmap <leader>r :source $MYVIMRC<cr>
@@ -89,6 +120,12 @@ nmap <leader>f :CtrlPMixed<CR>
 nmap <leader>b :CtrlPBuffer<CR>
 " %% gives you the current directory
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
+"""""""""" Split Window Navigation
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
 
 " Font setting
 if has("gui_running")
@@ -223,5 +260,18 @@ if executable('ag')
 endif
 
 " bind Leader G to grep shortcut
-command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+" command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 nnoremap <leader>G :Ag<SPACE>
+
+" fzf
+nnoremap <C-P> :Files<cr>
+nnoremap <C-B> :Buffers<cr>
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+
+" vim-test
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
+let test#strategy = "dispatch"

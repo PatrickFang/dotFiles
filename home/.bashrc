@@ -48,14 +48,14 @@ alias vfwd='cd ~/vagrant/ && vagrant ssh -- -N -L 3000:localhost:3000'
 alias vssh='cd ~/vagrant/ && vagrant ssh'
 alias ctagshere='ctags -R --exclude=.git --exclude=log --exclude=node_modules *'
 
-alias be='bundle exec'
-alias bi='bundle install'
-alias berc='bundle exec rails c'
-alias bers='bundle exec rails s'
 alias bert='bundle exec rake test:all'
-alias beri='bundle exec ruby -Itest'
-alias ss='script/server'
-alias st='script/test'
+alias beri='RAILS_ENV=test bundle exec ruby -Itest'
+alias gs='git ss'
+alias ga='git aa'
+alias gd='git diff'
+alias gdc='git dc'
+alias subl='sublime'
+
 
 if [[ $OSTYPE = darwin* ]]; then
   alias ll='ls -alFG'
@@ -128,12 +128,16 @@ fi
 ##################### PATH options
 
 export PATH="/usr/local/heroku/bin:$PATH"
+export PATH=/usr/local/bin:$PATH
 
 if [ $OSTYPE == 'linux-gnu' ]; then
   export PATH=$HOME/npm/bin:$PATH
 fi
 
-if [[ $OSTYPE = darwin* ]]; then
-  export PATH="$HOME/.rbenv/bin:$PATH"
-  if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-fi
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="$HOME/.yarn/bin:$PATH"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+
